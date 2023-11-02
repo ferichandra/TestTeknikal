@@ -1,0 +1,17 @@
+-- public.employee definition
+
+-- Drop table
+
+-- DROP TABLE public.employee;
+
+CREATE TABLE public.employee (
+	id int8 NOT NULL DEFAULT nextval('employe_seq'::regclass),
+	"name" varchar NULL,
+	age int4 NULL,
+	address varchar NULL,
+	email varchar NULL,
+	createdat timestamp NULL DEFAULT now(),
+	updateat timestamp NULL,
+	deleteat timestamp NULL,
+	CONSTRAINT employee_pk PRIMARY KEY (id)
+);
