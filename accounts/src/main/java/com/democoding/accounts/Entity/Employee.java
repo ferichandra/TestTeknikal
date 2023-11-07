@@ -16,20 +16,28 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employe_seq")
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "age")
     private Integer age;
+
     @Column(name = "address")
     private String address;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "createdat")
     private Date createdAt;
+
     @Column(name = "updateat")
     private Date updateAt;
+
     @Column(name = "deleteat")
     private Date deleteAt;
+
     @Column(name = "role_id", nullable = false, insertable = false, updatable = false)
     private Integer roledId;
 

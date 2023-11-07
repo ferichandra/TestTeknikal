@@ -28,6 +28,7 @@ public class ReportService {
                 List<String> text = new ArrayList<>();
                 List<String> tableHeader = new ArrayList<>();
                 label.add("Report Employee");
+                text.add("");
 
                 tableHeader.add("Name + Role");
                 tableHeader.add("Age");

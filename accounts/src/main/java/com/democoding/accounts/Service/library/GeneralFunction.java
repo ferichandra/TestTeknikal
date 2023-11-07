@@ -156,6 +156,7 @@ public class GeneralFunction {
         }
 
     }
+
     public String encrypt(String text) {
         try {
             byte[] bytesEncoded = Base64.encodeBase64(text.getBytes());
@@ -220,5 +221,18 @@ public class GeneralFunction {
         return text;
     }
 
+    public static String decrypt(String text) {
+        try {
+            text = text.replace("----", "/");
+            byte[] bytesEncoded = Base64.decodeBase64(text.getBytes());
+            text = new String(bytesEncoded);
+            String[] splitter = text.split("/");
+            text = splitter[splitter.length - 1];
+            return text;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
 }

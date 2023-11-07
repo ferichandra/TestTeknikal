@@ -19,8 +19,8 @@ public class NativeQuery {
         try {
             Query query;
             query = this.em.createNativeQuery(
-                    "select CONCAT(emp.name+' - '+role.role_name),emp.age,emp.address,emp.email " +
-                            "from public.employee emp join public.role role on emp.role_id = role.id where emp.deleted_at is null " +
+                    "select CONCAT(emp.name,' - ',role.role_name) as name,emp.age,emp.address,emp.email " +
+                            "from public.employee emp join public.role role on emp.role_id = role.id where emp.deleteat is null " +
                             "order by emp.id;"
             );
             List<Object[]> resultList = query.getResultList();
