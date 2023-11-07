@@ -31,8 +31,8 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public AnyPaginationDto allEmployee(@RequestParam(defaultValue = "0") int pageNo,
-                                        @RequestParam(defaultValue = "10") int pageSize) {
-        return employeeService.paginationEmployee(pageNo, pageSize);
+                                        @RequestParam(defaultValue = "10") int pageSize, @RequestParam("name") String name) {
+        return employeeService.paginationEmployee(pageNo, pageSize, name);
     }
 
     @GetMapping("/list-employee")
@@ -59,5 +59,10 @@ public class EmployeeController {
     @ResponseBody
     public SalesReport reportEmployee(@RequestParam("export") String export) {
         return reportService.reportEmployee(export);
+    }
+    @GetMapping("/avg-employee")
+    @ResponseBody
+    public Float reportEmployee() {
+        return employeeService.averageAge();
     }
 }

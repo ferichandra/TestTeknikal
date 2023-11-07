@@ -26,10 +26,11 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final RoleRepository roleRepository;
 
-    public AnyPaginationDto paginationEmployee(int pageNo, int pageSize) {
+    public AnyPaginationDto paginationEmployee(int pageNo, int pageSize,String name) {
         AnyPaginationDto result = new AnyPaginationDto();
         Pageable page = PageRequest.of(pageNo, pageSize);
-        Page<Employee> employeePage = employeeRepository.findAll(page);
+        name = name.toLowerCase();
+        Page<Employee> employeePage = employeeRepository.findAll(page,name);
         List<EmployeeDto> employeeDtoList = new ArrayList<>();
         for (Employee employee : employeePage) {
             EmployeeDto employeeDto = new EmployeeDto();
@@ -98,6 +99,10 @@ public class EmployeeService {
             throw new ResourceNotAcceptableException("Failed Update Employee");
         }
         return messageDto;
+    }
+    public Float averageAge(){
+        Float total = employeeRepository.avgEmployee();
+        return total;
     }
 
 }
