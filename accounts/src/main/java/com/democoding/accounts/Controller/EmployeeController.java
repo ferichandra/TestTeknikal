@@ -4,8 +4,12 @@ import com.democoding.accounts.Dto.AnyPaginationDto;
 import com.democoding.accounts.Dto.EmployeeRequestDto;
 import com.democoding.accounts.Dto.MessageDto;
 import com.democoding.accounts.Entity.Employee;
+import com.democoding.accounts.Entity.SalesReport;
 import com.democoding.accounts.Repository.EmployeeRepository;
 import com.democoding.accounts.Service.EmployeeService;
+import com.democoding.accounts.Service.ReportService;
+import com.oembedler.moon.graphql.engine.stereotype.GraphQLComplexity;
+import com.oembedler.moon.graphql.engine.stereotype.GraphQLField;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +22,9 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
     private final EmployeeRepository employeeRepository;
+    private final ReportService reportService;
 
-    @GetMapping("Hello")
+    @GraphQLField("/Hello")
     public String sayHello() {
         return "Welcome To Learn Microservice";
     }
@@ -35,7 +40,6 @@ public class EmployeeController {
         return employeeRepository.findAll();
     }
 
-
     @PostMapping("/addEmployee")
     public MessageDto addEmployee(@RequestBody EmployeeRequestDto request) {
         return employeeService.addEmployee(request);
@@ -49,5 +53,11 @@ public class EmployeeController {
     @DeleteMapping("/deleteEmployee/{id}")
     public MessageDto deleteEmployee(@PathVariable("id") Long id) {
         return employeeService.deleteEmployee(id);
+    }
+
+    @GetMapping("/report-employee")
+    @ResponseBody
+    public SalesReport reportEmployee(@RequestParam("export") String export) {
+        return reportService.reportEmployee(export);
     }
 }

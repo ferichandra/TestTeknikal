@@ -5,10 +5,11 @@ import lombok.Data;
 
 import javax.xml.validation.Schema;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
-@Table( name = "employee")
+@Table(name = "employee")
 public class Employee {
     @Id
     @SequenceGenerator(name = "employe_seq", sequenceName = "employe_seq", initialValue = 1, allocationSize = 1)
@@ -29,4 +30,10 @@ public class Employee {
     private Date updateAt;
     @Column(name = "deleteat")
     private Date deleteAt;
+    @Column(name = "role_id", nullable = false, insertable = false, updatable = false)
+    private Integer roledId;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    private Role role;
 }

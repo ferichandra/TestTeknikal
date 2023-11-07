@@ -8,4 +8,5 @@ public class EmployeeRequestDto {
     private Integer age;
     private String address;
     private String email;
+    private Integer roleId;
 }

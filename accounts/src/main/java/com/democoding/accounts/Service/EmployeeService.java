@@ -7,6 +7,7 @@ import com.democoding.accounts.Dto.MessageDto;
 import com.democoding.accounts.Entity.Employee;
 import com.democoding.accounts.Exception.ResourceNotAcceptableException;
 import com.democoding.accounts.Repository.EmployeeRepository;
+import com.democoding.accounts.Repository.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.aspectj.bridge.Message;
 import org.springframework.data.domain.Page;
@@ -23,13 +24,14 @@ import java.util.Optional;
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final RoleRepository roleRepository;
 
-    public AnyPaginationDto paginationEmployee(int pageNo, int pageSize){
+    public AnyPaginationDto paginationEmployee(int pageNo, int pageSize) {
         AnyPaginationDto result = new AnyPaginationDto();
-        Pageable page = PageRequest.of(pageNo,pageSize);
-        Page<Employee>employeePage = employeeRepository.findAll(page);
-        List<EmployeeDto>employeeDtoList = new ArrayList<>();
-        for(Employee employee : employeePage){
+        Pageable page = PageRequest.of(pageNo, pageSize);
+        Page<Employee> employeePage = employeeRepository.findAll(page);
+        List<EmployeeDto> employeeDtoList = new ArrayList<>();
+        for (Employee employee : employeePage) {
             EmployeeDto employeeDto = new EmployeeDto();
             employeeDto.setId(employee.getId());
             employeeDto.setName(employee.getName());
@@ -46,51 +48,56 @@ public class EmployeeService {
         return result;
     }
 
-    public MessageDto addEmployee(EmployeeRequestDto request){
+    public MessageDto addEmployee(EmployeeRequestDto request) {
         MessageDto messageDto = new MessageDto();
-        try{
+        try {
             Employee employee = new Employee();
             employee.setName(request.getName());
             employee.setAge(request.getAge());
             employee.setAddress(request.getAddress());
             employee.setEmail(request.getEmail());
             employee.setCreatedAt(new Date());
+            employee.setRoledId(request.getRoleId());
+            employee.setRole(roleRepository.findRoleById(request.getRoleId().longValue()));
             employeeRepository.save(employee);
             messageDto.setMessage("Success Add Employee");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new ResourceNotAcceptableException("Failed Add Employee");
         }
         return messageDto;
     }
 
-    public MessageDto updateEmployee(EmployeeRequestDto request,Long id){
+    public MessageDto updateEmployee(EmployeeRequestDto request, Long id) {
         MessageDto messageDto = new MessageDto();
-        try{
+        try {
             Employee employee = employeeRepository.findEmployeeByIdAndDeleteAtIsNull(id);
             employee.setName(request.getName());
             employee.setAge(request.getAge());
             employee.setAddress(request.getAddress());
             employee.setEmail(request.getEmail());
             employee.setUpdateAt(new Date());
+            employee.setRoledId(request.getRoleId());
+            employee.setRole(roleRepository.findRoleById(request.getRoleId().longValue()));
             employeeRepository.save(employee);
             messageDto.setMessage("Success Update Employee");
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ResourceNotAcceptableException("Failed Update Employee");
         }
         return messageDto;
     }
 
-    public MessageDto deleteEmployee(Long id){
+    public MessageDto deleteEmployee(Long id) {
         MessageDto messageDto = new MessageDto();
-        try{
+        try {
             Employee employee = employeeRepository.findEmployeeByIdAndDeleteAtIsNull(id);
             employee.setDeleteAt(new Date());
             employeeRepository.save(employee);
             messageDto.setMessage("Success Update Employee");
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ResourceNotAcceptableException("Failed Update Employee");
         }
         return messageDto;
     }
+
 }
