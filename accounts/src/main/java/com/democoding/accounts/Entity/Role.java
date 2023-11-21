@@ -10,8 +10,8 @@ import java.util.Date;
 @Table( name = "role")
 public class Role {
     @Id
-    @SequenceGenerator(name = "role_seq", sequenceName = "role_seq", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
+    @SequenceGenerator(name = "role_id_seq", sequenceName = "role_id_seq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_id_seq")
     @Column(name = "id", nullable = false)
     private Long id;
 
