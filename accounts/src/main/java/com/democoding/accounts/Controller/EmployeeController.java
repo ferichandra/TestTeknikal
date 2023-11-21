@@ -24,7 +24,7 @@ public class EmployeeController {
     private final EmployeeRepository employeeRepository;
     private final ReportService reportService;
 
-    @GraphQLField("/Hello")
+    @GetMapping("/Hello")
     public String sayHello() {
         return "Welcome To Learn Microservice";
     }
