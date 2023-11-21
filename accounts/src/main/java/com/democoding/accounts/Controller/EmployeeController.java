@@ -35,11 +35,6 @@ public class EmployeeController {
         return employeeService.paginationEmployee(pageNo, pageSize, name);
     }
 
-    @GetMapping("/list-employee")
-    public Iterable<Employee> allEmployeeList() {
-        return employeeRepository.findAll();
-    }
-
     @PostMapping("/addEmployee")
     public MessageDto addEmployee(@RequestBody EmployeeRequestDto request) {
         return employeeService.addEmployee(request);

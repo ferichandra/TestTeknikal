@@ -6,6 +6,7 @@ import com.democoding.accounts.Dto.EmployeeRequestDto;
 import com.democoding.accounts.Dto.MessageDto;
 import com.democoding.accounts.Entity.Employee;
 import com.democoding.accounts.Exception.ResourceNotAcceptableException;
+import com.democoding.accounts.Exception.ResourceNotFoundException;
 import com.democoding.accounts.Repository.EmployeeRepository;
 import com.democoding.accounts.Repository.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -94,9 +95,9 @@ public class EmployeeService {
             Employee employee = employeeRepository.findEmployeeByIdAndDeleteAtIsNull(id);
             employee.setDeleteAt(new Date());
             employeeRepository.save(employee);
-            messageDto.setMessage("Success Update Employee");
+            messageDto.setMessage("Success Delete Employee");
         } catch (Exception e) {
-            throw new ResourceNotAcceptableException("Failed Update Employee");
+            throw new ResourceNotFoundException("Data Not Found");
         }
         return messageDto;
     }
