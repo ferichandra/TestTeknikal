@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Form</title>
+    <!-- Tautan ke Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Customer Form</h2>
+    <form th:action="@{/customers/save}" th:object="${customer}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="name">Nama:</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Alamat:</label>
+            <input type="text" class="form-control" id="address" th:field="*{address}" required>
+        </div>
+        <div class="form-group">
+            <label for="city">Kota:</label>
+            <input type="text" class="form-control" id="city" th:field="*{city}" required>
+        </div>
+        <div class="form-group">
+            <label for="province">Provinsi:</label>
+            <input type="text" class="form-control" id="province" th:field="*{province}" required>
+        </div>
+        <div class="form-group">
+            <label for="registrationDate">Tanggal Registrasi:</label>
+            <input type="date" class="form-control" id="registrationDate" th:field="*{registrationDate}" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select class="form-control" id="status" th:field="*{status}" required>
+                <option value="ACTIVE">Active</option>
+                <option value="INACTIVE">Inactive</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a th:href="@{/customers}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- Tautan ke Bootstrap JS dan Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

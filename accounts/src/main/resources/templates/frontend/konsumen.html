@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konsumen List</title>
+    <!-- Tautan ke Bootstrap CSS atau CSS lainnya -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Konsumen List</h2>
+
+    <!-- Tambahkan formulir pencarian -->
+
+
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Alamat</th>
+            <th>Kota</th>
+            <th>Provinsi</th>
+            <th>Tanggal Registrasi</th>
+            <th>Status</th>
+            <!-- Kolom lainnya sesuai dengan data yang dikembalikan -->
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop untuk menampilkan data konsumen -->
+        <tr th:each="konsumen, iterStat  : ${result}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${konsumen.nama}"></td>
+            <td th:text="${konsumen.alamat}"></td>
+            <td th:text="${konsumen.kota}"></td>
+            <td th:text="${konsumen.provinsi}"></td>
+            <td th:text="${konsumen.tglRegistrasi}"></td>
+            <td th:text="${konsumen.status}"></td>
+            <!-- Kolom lainnya sesuai dengan data yang dikembalikan -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Tautan ke Bootstrap JS dan Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
