@@ -36,4 +36,5 @@ public class KonsumenController {
     public MessageDto deleteKonsumen(@PathVariable("id") Long id) {
         return konsumenService.deleteKonsumen(id);
     }
+
 }
